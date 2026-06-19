@@ -54,7 +54,7 @@ public class FrmSocio extends javax.swing.JInternalFrame {
 
         pnlForm.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del Socio"));
 
-        jLabel1.setText("ID Socio");
+        jLabel1.setText("ID SOCIO");
 
         txtId.setEditable(false);
 
