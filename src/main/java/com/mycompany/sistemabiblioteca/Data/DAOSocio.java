@@ -107,6 +107,49 @@ package com.mycompany.sistemaBiblioteca.Data;
           }
           return s;
       }
+      
+      
+          // ---------------------------------------------------
+    // BUSCAR SOCIO POR RUT
+    // ---------------------------------------------------
+
+    /**
+     * Busca un socio según su RUT único.
+     *
+     * @param rut RUT del socio a buscar
+     * @return objeto {@link Socio} encontrado, o {@code null} si no existe
+     */
+    public Socio buscarPorRut(String rut) {
+        Socio s = null;
+        String sql = """
+            SELECT idSocio, rut, nombreCompleto, telefono,
+                   email, direccion, fechaRegistro, estado
+            FROM Socio WHERE rut = ?
+            """;
+
+        try (Connection conn = Conn.get();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, rut);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                s = new Socio();
+                s.setIdSocio(rs.getInt("idSocio"));
+                s.setRut(rs.getString("rut"));
+                s.setNombreCompleto(rs.getString("nombreCompleto"));
+                s.setTelefono(rs.getString("telefono"));
+                s.setEmail(rs.getString("email"));
+                s.setDireccion(rs.getString("direccion"));
+                s.setFechaRegistro(rs.getDate("fechaRegistro"));
+                s.setEstado(rs.getString("estado"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return s;
+    }
   
       // ---------------------------------------------------
       // VERIFICAR EXISTENCIA POR RUT

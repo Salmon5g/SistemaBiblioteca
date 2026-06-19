@@ -100,8 +100,8 @@ public class BibliotecaFacade {
         return daoSocio.buscarPorId(id);
     }
 
-    public Socio buscarSocioPorRut(Integer id) {
-        return daoSocio.buscarPorId(id);
+     public Socio buscarSocioPorRut(String rut) {
+        return daoSocio.buscarPorRut(rut);
     }
 
     public void guardarSocio(Socio s) {
